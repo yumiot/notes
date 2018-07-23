@@ -50,3 +50,5 @@
 			SELECT * FROM Persons WHERE City LIKE '[ALN]%'
 		2. 现在，我们希望从上面的 "Persons" 表中选取居住的城市不以 "A" 或 "L" 或 "N" 开头的人：
 			SELECT * FROM Persons WHERE City LIKE '[!ALN]%'
+
+4. IN 操作符 允许我们在 WHERE 子句中规定多个值。
