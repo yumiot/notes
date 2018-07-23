@@ -1,0 +1,101 @@
+1. 重要事项
+	一定要记住，SQL 对大小写不敏感！
+	多个数据时用,分隔!
+
+
+2. SQL DML 和 DDL
+	可以把 SQL 分为两个部分：数据操作语言 (DML) 和 数据定义语言 (DDL)。
+	SQL (结构化查询语言)是用于执行查询的语法。但是 SQL 语言也包含用于更新、插入和删除记录的语法。
+
+	(1) 查询和更新指令构成了 SQL 的 DML 部分：
+
+		SELECT - 从数据库表中获取数据
+		UPDATE - 更新数据库表中的数据
+		DELETE - 从数据库表中删除数据
+		INSERT INTO - 向数据库表中插入数据
+
+	(2) SQL 的数据定义语言 (DDL) 部分使我们有能力创建或删除表格。我们也可以定义索引（键），规定表之间的链接，以及施加表间的约束。
+
+		SQL 中最重要的 DDL 语句:
+
+		CREATE DATABASE - 创建新数据库
+		ALTER DATABASE - 修改数据库
+		CREATE TABLE - 创建新表
+		ALTER TABLE - 变更（改变）数据库表
+		DROP TABLE - 删除表
+		CREATE INDEX - 创建索引（搜索键）
+		DROP INDEX - 删除索引
+
+3. SELECT 从表中选取数据
+	用于从表中选取数据,结果被存储在一个结果表中（称为结果集）。
+	(1) select 列名称 from 表名称
+	(2) select * from 表名称
+			* 是取代所有列的快捷方式
+
+4. SELECT DISTINCT 返回唯一不同值
+	在表中，可能会包含重复值。这并不成问题，不过，有时您也许希望仅仅列出不同（distinct）的值。
+	(1) SELECT DISTINCT 列名称 FROM 表名称
+
+5. WHERE 用于有条件地从表中选取数据
+	语法: SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
+
+	运算操作符	描述
+		=	    等于
+		<>		不等于
+		>		大于
+		<		小于
+		>=		大于等于
+		<=		小于等于
+	 BETWEEN	在某个范围内
+     LIKE		搜索某种模式
+	注释：在某些版本的 SQL 中，操作符 <> 可以写为 !=。
+
+	例: SELECT * FROM db1 WHERE id > 10;
+	注意: 使用单引号''环绕文本值,数值不需要.
+
+6. AND 和 OR 运算符用于基于一个以上的条件对记录进行过滤。
+	AND 和 OR 运算符
+	AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来。
+
+	(1) AND 如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。
+	(2) OR 如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。
+	(3) () 结合 AND 和 OR 运算符
+	例: SELECT * FROM db1 WHERE (name ='Thomas' OR id = 10) AND LastName = 'Carter'
+
+7. ORDER BY 语句用于对结果集进行排序。
+	ORDER BY 语句默认按照升序对记录进行排序。
+	(1) ASC 升序排序
+	(2) DESC 降序排序
+	(3) 多个排序规则时用,隔开. 例: SELECT * FROM db1 ORSER BY id,name
+	语法: ORDER BY id DESC
+	例 SELECT * FROM db1 ORSER BY id DESC
+
+8. INSERT INTO 语句用于向表格中插入新的行。
+	语法
+	(1) INSERT INTO 表名称 VALUES (值1, 值2,....)
+	(2) 也可以指定所要插入数据的列：
+	INSERT INTO 表名称 (列1, 列2,...) VALUES (值1, 值2,....)
+	(3) 当数据表中有自增长主键时:
+		如果指定了该列的值，则新插入的值不能和已有的值重复，而且必须大于其中最大的一个值；
+		也可以不指定该列的值，只将其他列的值插入，让ID还是按照MySQL自增自己填； 
+		这种情况在进行插入的时候，两种解决方法： 
+
+		a. 可以把id的值设置为null或者0，这样子mysql都会自己做处理 
+		b. 手动指定需要插入的列，不插入这一个字段的数据！
+		例: INSERT INTO db1 VALUES (NULL,'aaa','bbb','ccc','ddd',12);
+
+9. Update 用于修改表中的数据。
+	语法：
+	UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+	例:UPDATE db1 SET name = 'Zhongshan', City = 'Nanjing' WHERE name = 'Wilson'
+
+10. DELETE 用于删除表中的行。
+	语法
+	DELETE FROM 表名称 WHERE 列名称 = 值
+	例:
+	删除某行
+	DELETE FROM db1 WHERE LastName = 'Wilson' 
+	删除所有行,可以在不删除表的情况下删除所有的行。这意味着表的结构、属性和索引都是完整的：
+	DELETE FROM table_name
+	或者：
+	DELETE * FROM table_name
