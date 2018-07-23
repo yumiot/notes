@@ -52,3 +52,10 @@
 			SELECT * FROM Persons WHERE City LIKE '[!ALN]%'
 
 4. IN 操作符 允许我们在 WHERE 子句中规定多个值。
+	语法
+	SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,...)
+
+5. BETWEEN 操作符
+	BETWEEN ... AND 会选取介于两个值之间的数据范围。这些值可以是数值、文本或者日期。
+	语法
+	SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2
