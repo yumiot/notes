@@ -1,0 +1,27 @@
+1. TOP 子句
+	TOP 子句用于规定要返回的记录的数目。对于拥有数千条记录的大型表来说，TOP 子句是非常有用的。但是并非所有的数据库系统都支持 TOP 子句。
+	(1) SQL Server 的语法：
+		SELECT TOP number|percent column_name(s) FROM table_name
+	(2) MySQL 和 Oracle 中的 SQL SELECT TOP 是等价的
+		(1) MySQL 使用 limit 语法
+			select * from table limit m,n
+			其中m是指记录开始的index，从0开始，表示第一条记录
+			n是指从第m+1条开始，取n条。
+			例: select * from tablename limit 2,4    即取出第3条至第6条，4条记录 
+		(2) Oracle 语法
+			SELECT column_name(s) FROM table_name WHERE ROWNUM <= number
+			例:	SELECT * FROM Persons WHERE ROWNUM <= 5
+
+2.LIKE 操作符用于在 WHERE 子句中搜索列中的指定模式。NOT为不包含
+	语法
+		SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern
+	LIKE 操作符实例
+	(1)	从 "db1" 表中选取name以 "N" 开始的数据：
+		SELECT * FROM db1 WHERE name LIKE 'N%'
+		提示："%" 可用于定义通配符（模式中缺少的字母）。
+	(2) 从 "db1" 表中选取name以 "g" 结尾的数据：
+		SELECT * FROM db1 WHERE name LIKE '%g'
+	(3) 从 "db1" 表中选取居住在包含 "lon" 的城市里的人：
+		SELECT * FROM db1 WHERE City LIKE '%lon%'
+	(4)	通过使用 NOT 关键字，我们可以从 "Persons" 表中选取居住在不包含 "lon" 的城市里的人：
+		SELECT * FROM Persons WHERE City NOT LIKE '%lon%'
