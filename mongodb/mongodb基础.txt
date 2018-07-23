@@ -1,0 +1,21 @@
+1. 创建数据库 use 命令
+	(1) 创建数据库 use DATABASE_NAME 。如果指定的数据库DATABASE_NAME不存在，则该命令将创建一个新的数据库，否则返回现有的数据库。
+		语法
+		use DATABASE_NAME
+		示例: 创建一个名称为<newdb>的数据库
+		> use newdb
+	
+	(2)	db 命令 检查当前选择的数据库
+		>db
+	
+	(3)	show dbs 检查数据库列表
+		>show dbs
+		
+		创建的数据库(newdb)不在列表中。要显示数据库，需要至少插入一个文档，空的数据库是不显示出来的。
+		>db.items.insert({"name":"yiibai tutorials"})
+		>show dbs
+		local     0.00005GB
+		test      0.00002GB
+		newdb      0.00002GB
+		Shell
+		在 MongoDB 中默认数据库是：test。 如果您还没有创建过任何数据库，则集合/文档将存储在test数据库中。
