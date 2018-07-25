@@ -1,0 +1,172 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$("input").focus(function () {
+				$("input").css("background-color", "#FFFFCC");
+			});
+			$("input").blur(function () {
+				$("input").css("background-color", "#D6D6FF");
+			});
+
+			$("#but1").click(function () {
+				window.alert("hahaha");
+			});
+
+			$(".but1").click(function () {
+				$("p").css({"color": "red", "font-size": "200%"});
+			});
+
+			$("p").mouseover(function () {
+				$("p").css({"color": "red"});
+			});
+			$("p").mouseleave(function () {
+				$("p").css("color", "#080808");
+			});
+
+            //jQuery get请求
+            $("#butGet").click(function () {
+            	const url = "http://127.0.0.1:9090/";
+            	$.get(url, function (data, status) {
+                    //处理信息
+                    alert(data.Name);
+                });
+            });
+
+            //jQuery Post请求
+            $("#butPost").click(function () {
+            	const url = "http://localhost:9090/cs"
+            	$.post(url, {
+                    //发送的数据
+                    id: "1",
+                    name: "abc",
+                    pass: "wahaha,,.."
+                }, function (data, status) {
+                    //处理信息
+                    alert(data.id);
+                });
+            }); 
+
+              //jQuery 表单处理
+            $("#sub_btn").click(function(){
+            	$("frm_reg").ajaxSumit(function(data){
+            		alert(data.name);
+            	});
+            });
+
+            //jQuery直接form提交
+            $("#sub_btn1").click(function(){
+            	var url="http://127.0.0.1:9090/cs";
+            	var data=$("#procurementform").serialize();
+            	$.post(url,data,function(msg){
+            		var json = JSON.parse(msg);
+            		if(json.statusCode==200){
+            			alert(json.message);
+            			setTimeout(function(){
+            				alert(data.name);
+            			},1200);
+            		}else{
+            			alert(json.message);
+            		}
+            	});
+            });
+
+        });
+
+        //ajax get请求
+        function ajaxGet() {
+        	let xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            	xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+            	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+            	if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            		document.getElementById("xs").innerHTML = xmlhttp.responseText;
+            	}
+            };
+            xmlhttp.open("GET", "http://127.0.0.1:9090/", true);
+            xmlhttp.send();
+        }
+
+        //ajax post请求
+        function ajaxPost() {
+        	let xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            	xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+            	xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+            	if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            		document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+            	}
+            }
+            xmlhttp.open("POST", "http://localhost:9090/cs", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("id=1&name=Bill&pass=Gates");
+        }
+    </script>
+</head>
+
+<body>
+	Enter your name: <input type="text"/>
+	<p>请在上面的输入域中点击，使其获得焦点，然后在输入域外面点击，使其失去焦点。</p>
+	<button id="but1">测试1</button>
+	<button class="but1">测试2</button>
+	<button id="butGet">Get测试</button>
+	<button onclick="ajaxGet()">Ajax_Get测试</button>
+	<button id="butPost">Post测试</button>
+	<button onclick="ajaxPost()">Ajax_Post测试</button>
+	<h3 id="xs">显示请求内容</h3>
+	<div id="myDiv"></div>
+
+	<!-- 纯From表单提交 -->
+	<div>
+		<!-- 加入 target="nm_iframe" 提交完From表单后不进行页面跳转-->
+		<form action="http://localhost:9090/cs" method="post" target="nm_iframe">
+			First name:<br>
+			<input type="text" name="name" value="Mickey">
+			<br>
+			Last name:<br>
+			<input type="password" name="pass" value="Mouse">
+			<br><br>
+			<input type="submit" value="Submit">
+		</form> 
+	</div>
+
+	<div>
+		<h2>jQuery表单处理</h2>
+		<form name="input" action="http://localhost:9090/cs" method="post" accept-charset="utf-8" id="frm_reg" target="nm_iframe">
+			First name: 
+			<input type="text" name="name" value="Mickey" size="20">
+			<br />Last name: 
+			<input type="password" name="pass" value="Mouse" size="20">
+			<br />
+			<input type="submit" value="Submit" id="sub_btn">
+		</form> 
+	</div>
+
+	<div>
+		<h2>直接使用jQuery进行表单处理</h2>
+		<form id="frm_reg">
+			First name: 
+			<input type="text" name="name" placeholder="请输入用户名" size="20">
+			<br />Last name: 
+			<input type="password" name="pass" placeholder="请输入密码" size="20">
+			<br />
+			<!-- <input type="submit" value="Submit" id="sub_btn1"> -->
+			<button id="sub_btn1">提交</button>
+		</form> 
+	</div>
+
+	<iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe> 
+</body>
+</html>

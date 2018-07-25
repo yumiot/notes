@@ -1,0 +1,8 @@
+1. jQuery控制input不可编辑
+	(1).开启disabled，是input不可以编辑
+	　　$("#id").attr("disabled","disabled");
+	(2).关闭disabled
+	　　$("#id").removeAttr("disabled");
+	普通js中是这样写的，document.getElementById("id").disabled = false;
+
+2. 
