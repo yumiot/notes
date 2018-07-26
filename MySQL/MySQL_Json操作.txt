@@ -1,0 +1,28 @@
+MySQL 5.7版本之后加入Json操作
+官方文档：https://dev.mysql.com/doc/refman/8.0/en/json.html
+
+1. 创建json值
+	创建含有json数据格式的数据表t1： 
+		CREATE TABLE t1 (jdoc JSON);
+		Query OK, 0 rows affected (0.20 sec)
+
+	插入一条json数据：	
+		INSERT INTO t1 VALUES('{"key1": "value1", "key2": "value2"}');
+		Query OK, 1 row affected (0.01 sec)
+
+2. JSON_TYPE()函数需要一个JSON参数并尝试将其解析为JSON值。如果值有效，则返回值的JSON类型，否则产生错误：
+	例： mysql> SELECT JSON_TYPE('["a", "b", 1]');
+		+----------------------------+
+		| JSON_TYPE('["a", "b", 1]') |
+		+----------------------------+
+		| ARRAY                      |
+		+----------------------------+、
+		MySQL使用utf8mb4字符集和utf8mb4_bin排序规则处理JSON上下文中使用的 字符串 。其他字符集中的字符串将utf8mb4根据需要进行转换。（对于在串ascii或 utf8字符集，则不需要转换，因为ascii和utf8都是的子集utf8mb4。）
+
+3. JSON_ARRAY()获取（可能为空）值列表并返回包含这些值的JSON数组：
+	例：	mysql> SELECT JSON_ARRAY('a', 1, NOW());
+		+----------------------------------------+
+		| JSON_ARRAY('a', 1, NOW())              |
+		+----------------------------------------+
+		| ["a", 1, "2015-07-27 09:43:47.000000"] |
+		+----------------------------------------+
