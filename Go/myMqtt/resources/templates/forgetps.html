@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <div id="navbar-header">
+                <h2><a href="#">MyMQTT</a></h2>
+            </div>
+        </div>
+        <div class="col-md-4 column">
+            <div style="margin-top: 30%">
+                <h3>找回你的登录密码：</h3>
+                <h3>  </h3>
+                <form action="/u/forgotten" method="post">
+                    <h4>邮箱：<label>
+                        <input type="text" name="mailbox"/>
+                    </label></h4>
+                    <p>
+                        <button>提交</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 column">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
